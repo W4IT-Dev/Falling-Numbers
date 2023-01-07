@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "name": "Falling Numbers",
+  "description": "A fun game where you have to match the numbers!",
+  "type": "web",
+  "launch_path": "/index.html",
+  "icons": {
+    "56": "/img/icon.png",
+    "128": "/img/icon.png"
+  },
+  "developer": {
+    "name": "W4IT Dev",
+    "url": "https://www.kaiostech.com"
+  },
+  "locales": {
+    "en-US": {
+      "name": "Falling Numbers",
+      "subtitle": "Be fast and match the number",
+      "description": "A fun game where you have to match the numbers!"
+    }
+  },
+  "default_locale": "en-US",
+  "fullscreen": true
+}
