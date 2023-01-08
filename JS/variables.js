@@ -3,18 +3,22 @@ let background = new Image();
 
 let player = {
     num: 0,
-    x: 150,
+    x: 145,
     y: 127,
     height: 17,
     width: 33,
     src: "/img/0.png",
     img: new Image()
 };
+
 let score = highscore = 0;
 let left = right = ingame = false;
+
 let spawnIntervalTime = 1800;
 let timeGone = 0;
+
 let mute = 'Mute';
+let paused = false;
 
 let fallingNumbers = [];
 
@@ -26,6 +30,7 @@ let scoreDisplay = document.querySelector('#scoreDisplay');
 let scoreDisplay2 = document.querySelector('#score');
 let startScreen = document.querySelector('#startScreen');
 let gameOverDisplay = document.querySelector('#gameOverDisplay');
+let pauseDisplay = document.querySelector('#pauseDisplay');
 let footer = document.querySelector('footer');
 let sl = document.querySelector('#softleft');
 let sr = document.querySelector('#softright');

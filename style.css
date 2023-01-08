@@ -18,18 +18,22 @@ canvas {
 
 #startScreen,
 #scoreDisplay,
-#gameOverDisplay {
+#gameOverDisplay,
+#pauseDisplay {
     position: absolute;
     left: 50%;
 }
 
 #scoreDisplay {
     font-size: 23px;
+    text-align: center;
     transform: translateX(-50%);
     background-color: rgba(255, 255, 255, .3);
 }
 
-#startScreen, #gameOverDisplay {
+#startScreen,
+#gameOverDisplay,
+#pauseDisplay {
     line-height: 18px;
     text-align: center;
     width: 100%;
@@ -37,11 +41,12 @@ canvas {
     transform: translate(-50%, -50%);
 }
 
-#startScreen p {
+#startScreen p, #pauseDisplay p {
     font-size: 18px;
 }
 
-#gameOverDisplay {
+#gameOverDisplay,
+#pauseDisplay {
     display: none;
     background-color: rgba(255, 255, 255, .4);
 }
@@ -61,9 +66,11 @@ footer {
     padding: 3.4px;
     font-size: 18.4px;
 }
+
 /* 
 footer div {
     /* padding: 0px 2.4px 0px 2.4px; 
     background-color: rgba(255, 255, 255, .5);
     border-radius: 40px;
 } */
+/* 

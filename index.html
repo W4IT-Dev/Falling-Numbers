@@ -6,14 +6,19 @@
     <script src="/JS/variables.js" defer></script>
     <script src="/JS/functions.js" defer></script>
     <script src="/JS/script.js" defer></script>
-    <script src="/JS/keyEvents.js"></script>
+    <script src="/JS/keyEvents/game.js"></script>
+    <script src="/JS/keyEvents/softkeys.js"></script>
 </head>
 
 <body onload="appStart()">
-    <p id="scoreDisplay">High-Score: 0</p>
+    <p id="scoreDisplay">High Score: 0</p>
     <div id="startScreen">
         <h1>Falling Numbers</h1>
         <p>Press Enter/5 to start the game</p>
+    </div>
+    <div id="pauseDisplay">
+        <h1>Game paused!</h1>
+        <p>Press Enter/5 to continue the game</p>
     </div>
     <div id="gameOverDisplay">
         <h1>Game Over!</h1>

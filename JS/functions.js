@@ -2,11 +2,10 @@ function appStart() {
     canvas = document.querySelector('canvas');
     ctx = canvas.getContext('2d');
     loadImages();
-    gamemusic.play();
-    if (localStorage.highscore) highscore = localStorage.highscore, scoreDisplay.innerText = `High-Score: ${highscore}`;
+    if (localStorage.highscore) highscore = localStorage.highscore, scoreDisplay.innerText = `High Score: ${highscore}`;
     if (localStorage.mute) {
         mute = localStorage.mute;
-        if (mute === "Mute") return
+        if (mute === "Mute") return gamemusic.play();
         gamemusic.pause();
         footer.innerHTML = `
             <div id="softleft">${mute}</div>
@@ -47,21 +46,39 @@ function gameOver() {
         <div id="softright">Home</div>
     `
     spawnIntervalTime = 1800;
-    timeGone = 0;
-    left = false;
-    right = false;
-    ingame = false;
+    timeGone = score = 0;
+    left = right = ingame = false;
     clearInterval(newNumbers);
     clearInterval(updateInterval);
     gameOverDisplay.style.display = 'block';
     scoreDisplay.style.display = 'none';
     if (score > highscore) return newHighScore();
     scoreDisplay2.innerHTML = `Score:${score}`;
-    score = 0;
+}
+
+function restart() {
+    fallingNumbers = [];
+    pauseDisplay.style.display = 'none';
+    spawnIntervalTime = 1800;
+    timeGone = score = 0;
+    left = right = paused = false;
+    footer.innerHTML = `
+        <div id="softleft">Pause</div>
+    `
+    player.x = 145;
+    player.num = 0;
+    player.src = "img/0.png";
+    player.img.src = player.src;
+    scoreDisplay.innerText = `Score: ${score}`;
 }
 
 function pause() {
-    console.log('pause');
+    paused = true;
+    pauseDisplay.style.display = 'block';
+    footer.innerHTML = `
+        <div id="softleft">Restart</div>
+        <div id="softright">Home</div>
+    `
 }
 
 function tutorial() {
@@ -70,24 +87,28 @@ function tutorial() {
 
 function home() {
     gameOverDisplay.style.display = 'none';
-    scoreDisplay.innerText = `High-Score: ${highscore}`
+    pauseDisplay.style.display = 'none';
+    scoreDisplay.innerText = `High Score: ${highscore}`
     scoreDisplay.style.display = 'block';
     startScreen.style.display = 'block';
     fallingNumbers = [];
     player.x = 3000;
+    clearInterval(newNumbers);
+    clearInterval(updateInterval);
     footer.innerHTML = `
         <div id="softleft">${mute}</div>
         <div id="softright">Tutorial</div>
     `
+    paused = ingame = false;
 }
 
 function newHighScore() {
-    highscore = score;
-    localStorage.highscore = highscore;
-    scoreDisplay2.innerHTML = `New High-Score!<br>Score:${score}`;
+    localStorage.highscore = highscore = score;
+    scoreDisplay2.innerHTML = `New High Score!<br>Score:${score}`;
 }
 
 function update() {
+    if (paused) return
     if (left && player.x > 3) player.x -= 2.9;
     if (right && player.x + player.width <= 297) player.x += 2.9;
     fallingNumbers.forEach(number => {
@@ -97,7 +118,9 @@ function update() {
                 fallingNumbers = fallingNumbers.filter(i => i != number);
                 score += number.num + 1;
                 scoreDisplay.innerText = `Score: ${score}`;
-                spawnIntervalTime -= score / 1.55;
+                if (spawnIntervalTime > 550) {
+                    spawnIntervalTime = 1800 - score / 1.55;
+                }
                 return;
             }
             return gameOver();
@@ -120,6 +143,7 @@ function changePlayerNumber() {
 }
 
 function addNewNumbers() {
+    if (paused) return
     if (!(spawnIntervalTime - timeGone <= 0)) return timeGone += 100;
     timeGone = 0;
     number = parseInt(Math.random() * 10);
@@ -131,7 +155,7 @@ function addNewNumbers() {
         width: 33,
         src: "img/" + number + ".png",
         img: new Image(),
-        speed: 0.9 + score / 500
+        speed: 0.9 + score / 300
     }
     newNumber.img.src = newNumber.src;
     fallingNumbers.push(newNumber);
@@ -150,11 +174,9 @@ function un$mute() {
         return;
     }
     gamemusic.pause();
-    mute = 'Unmute';
+    localStorage.mute = mute = 'Unmute';
     footer.innerHTML = `
         <div id="softleft">${mute}</div>
         <div id="softright">Tutorial</div>
     `
-    localStorage.mute = mute;
-
 }
