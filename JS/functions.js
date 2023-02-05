@@ -30,8 +30,7 @@ function draw() {
 
 function startGame() {
     footer.innerHTML = '<div id="softleft">Pause</div>';
-    startScreen.style.display = 'none';
-    gameOverDisplay.style.display = 'none';
+    startScreen.style.display = gameOverScreen.style.display = 'none';
     scoreDisplay.innerText = 'Score: 0';
     scoreDisplay.style.display = 'block';
     ingame = true;
@@ -46,19 +45,19 @@ function gameOver() {
         <div id="softright">Home</div>
     `
     spawnIntervalTime = 1800;
-    timeGone = score = 0;
     left = right = ingame = false;
     clearInterval(newNumbers);
     clearInterval(updateInterval);
-    gameOverDisplay.style.display = 'block';
+    gameOverScreen.style.display = 'block';
     scoreDisplay.style.display = 'none';
+    timeGone = score = 0;
     if (score > highscore) return newHighScore();
     scoreDisplay2.innerHTML = `Score:${score}`;
 }
 
 function restart() {
     fallingNumbers = [];
-    pauseDisplay.style.display = 'none';
+    pauseScreen.style.display = 'none';
     spawnIntervalTime = 1800;
     timeGone = score = 0;
     left = right = paused = false;
@@ -74,7 +73,7 @@ function restart() {
 
 function pause() {
     paused = true;
-    pauseDisplay.style.display = 'block';
+    pauseScreen.style.display = 'block';
     footer.innerHTML = `
         <div id="softleft">Restart</div>
         <div id="softright">Home</div>
@@ -82,15 +81,38 @@ function pause() {
 }
 
 function tutorial() {
-    console.log('tutorial');
+    startScreen.style.display = gameOverScreen.style.display = scoreDisplay.style.display = 'none'
+    tutorialScreen.style.display = 'block'
+    footer.innerHTML = `
+        <div id="softleft" style="color: #444">Last</div>
+        <div style="font-size: 25px;font-weight: 700; position: absolute; left: 50%; transform: translate(-50%, -50%)">SKIP</div>
+        <div id="softright">Next</div>
+    `
+}
+
+function handleTutorialText(move) {
+    if (move === 'left') {
+        if (tutorialText.innerText.includes('5')) return
+        if (tutorialText.innerText.includes('4')) return footer.children[0].style.color = '#444', tutorialText.innerText = "Press Enter/5 to increase the player's number.";
+        if (tutorialText.innerText.includes('6')) return tutorialText.innerText = "Press Left/4 to move to the left.";
+        if (tutorialText.innerText.includes('Match')) return footer.children[2].innerText = 'Next', footer.children[2].innerText = 'Finsih', tutorialText.innerText = "Press Right/6 to move to the right.";
+        return
+    }
+    if (tutorialText.innerText.includes('5')) return footer.children[0].style.color = '#000', tutorialText.innerHTML = "Press Left/4 to move to the left.";
+    if (tutorialText.innerText.includes('4')) return tutorialText.innerText = "Press Right/6 to move to the right.";
+    if (tutorialText.innerText.includes('6')) return footer.children[2].innerText = 'Finish', tutorialText.innerText = "Match the player's number to the falling number and collect it to score points.";
+    if (tutorialText.innerText.includes('Match')) return endTutorial();
+}
+
+function endTutorial() {
+    tutorialText.innerText = "Press Enter/5 to increase the player's number.";
+    home();
 }
 
 function home() {
-    gameOverDisplay.style.display = 'none';
-    pauseDisplay.style.display = 'none';
+    gameOverScreen.style.display = pauseScreen.style.display = tutorialScreen.style.display = 'none';
+    scoreDisplay.style.display = startScreen.style.display = 'block'
     scoreDisplay.innerText = `High Score: ${highscore}`
-    scoreDisplay.style.display = 'block';
-    startScreen.style.display = 'block';
     fallingNumbers = [];
     player.x = 3000;
     clearInterval(newNumbers);
@@ -109,8 +131,14 @@ function newHighScore() {
 
 function update() {
     if (paused) return
-    if (left && player.x > 3) player.x -= 2.9;
-    if (right && player.x + player.width <= 297) player.x += 2.9;
+    let speed;
+    if (score / 600 > 0.9) {
+        speed = 0.9
+    } else {
+        speed = score / 600;
+    };
+    if (left && player.x > 3) player.x -= (2.9 + speed);
+    if (right && player.x + player.width <= 297) player.x += (2.9 + speed);
     fallingNumbers.forEach(number => {
         number.y += number.speed;
         if (number.x + number.width > player.x && number.y + number.height > player.y && number.x < player.x + player.width && number.y < player.y + player.height) {
@@ -147,6 +175,11 @@ function addNewNumbers() {
     if (!(spawnIntervalTime - timeGone <= 0)) return timeGone += 100;
     timeGone = 0;
     number = parseInt(Math.random() * 10);
+    if (score / 300 > 1.05) {
+        speed = 1.05
+    } else {
+        speed = score / 300
+    }
     let newNumber = {
         num: number,
         x: Math.random() * 260,
@@ -155,11 +188,10 @@ function addNewNumbers() {
         width: 33,
         src: "img/" + number + ".png",
         img: new Image(),
-        speed: 0.9 + score / 300
+        speed: 0.9 + speed
     }
     newNumber.img.src = newNumber.src;
     fallingNumbers.push(newNumber);
-
 }
 
 function un$mute() {

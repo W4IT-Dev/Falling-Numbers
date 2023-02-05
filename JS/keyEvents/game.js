@@ -5,7 +5,7 @@ document.addEventListener('keydown', e => {
     // === ADD 1 TO PLAYER ===
     if (e.key == 'Enter' || e.key == 5) {
         if (paused) {
-            pauseDisplay.style.display = 'none';
+            pauseScreen.style.display = 'none';
             footer.innerHTML = `
                 <div id="softleft">Pause</div>
             `

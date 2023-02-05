@@ -29,12 +29,12 @@ let gamemusic = new Audio("sound/Komiku-Bicycle.mp3");
 let scoreDisplay = document.querySelector('#scoreDisplay');
 let scoreDisplay2 = document.querySelector('#score');
 let startScreen = document.querySelector('#startScreen');
-let gameOverDisplay = document.querySelector('#gameOverDisplay');
-let pauseDisplay = document.querySelector('#pauseDisplay');
+let gameOverScreen = document.querySelector('#gameOverDisplay');
+let pauseScreen = document.querySelector('#pauseDisplay');
+let tutorialScreen = document.querySelector('#tutorialDisplay');
+let tutorialText = document.querySelector('#tutorialDisplay p');
 let footer = document.querySelector('footer');
-let sl = document.querySelector('#softleft');
-let sr = document.querySelector('#softright');
 
 window.addEventListener('error', e => {
-    console.log(e);
+    console.error(e);
 })
