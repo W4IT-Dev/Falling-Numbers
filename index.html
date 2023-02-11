@@ -8,6 +8,7 @@
     <script src="/JS/script.js" defer></script>
     <script src="/JS/keyEvents/game.js"></script>
     <script src="/JS/keyEvents/softkeys.js"></script>
+    <script src="/JS/kaiads.v5.min.js"></script>
 </head>
 
 <body onload="appStart()">
@@ -21,20 +22,28 @@
         <p>Press Enter/5 to continue the game</p>
     </div>
     <div id="gameOverDisplay">
-        <h1>Game Over!</h1>
-        <p id="score" style="font-size: 25px;">Score: 0</p>
-        <p>Press Enter/5 to restart the game</p>
+        <div id="respawnPossibilityScreen">
+            <h1>Get another life?</h1>
+            <p id="score" style="font-size: 25px;">Score: 0</p>
+            <p>Press Enter/5 to watch an advertisement and get another life.</p>
+        </div>
+        <div id="gameOver">
+            <h1>Game Over!</h1>
+            <p id="score" style="font-size: 25px;">Score: 0</p>
+            <p>Press Enter/5 to restart the game</p>
+        </div>
+
     </div>
     <div id="tutorialDisplay">
         <!-- <img src="/img/tutorial/1.png"> -->
         <p>Press Enter/5 to increase the player's number.</p>
     </div>
+    <!-- <p id="credits">Music: https://www.chosic.com/free-music/all/</p> -->
     <canvas></canvas>
     <footer>
         <div id="softleft">Mute</div>
         <div id="softright">Tutorial</div>
     </footer>
 </body>
-<!--Music: https://www.chosic.com/free-music/all/-->
 
 </html>

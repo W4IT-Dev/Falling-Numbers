@@ -50,7 +50,9 @@ canvas {
 
 #gameOverDisplay,
 #pauseDisplay,
-#tutorialDisplay {
+#tutorialDisplay,
+#gameOver,
+#respawnPossibilityScreen {
     display: none;
     background-color: rgba(255, 255, 255, .4);
 }

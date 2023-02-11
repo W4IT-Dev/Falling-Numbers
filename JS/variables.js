@@ -1,4 +1,4 @@
-let canvas, ctx, newNumbers, updateInterval;
+let canvas, ctx, newNumbers, updateInterval, hitNumber;
 let background = new Image();
 
 let player = {
@@ -11,14 +11,12 @@ let player = {
     img: new Image()
 };
 
-let score = highscore = 0;
-let left = right = ingame = false;
+let score = highscore = timeGone = 0;
+let left = right = ingame = paused = alreadyRespawned = haveRespwanPossibility = onGameOverScreen = false;
 
 let spawnIntervalTime = 1800;
-let timeGone = 0;
 
 let mute = 'Mute';
-let paused = false;
 
 let fallingNumbers = [];
 
@@ -29,7 +27,11 @@ let gamemusic = new Audio("sound/Komiku-Bicycle.mp3");
 let scoreDisplay = document.querySelector('#scoreDisplay');
 let scoreDisplay2 = document.querySelector('#score');
 let startScreen = document.querySelector('#startScreen');
-let gameOverScreen = document.querySelector('#gameOverDisplay');
+let gameOverScreen = [
+    document.querySelector('#gameOverDisplay'),
+    document.querySelector('#gameOverDisplay #respawnPossibilityScreen'),
+    document.querySelector('#gameOverDisplay #gameOver')
+]
 let pauseScreen = document.querySelector('#pauseDisplay');
 let tutorialScreen = document.querySelector('#tutorialDisplay');
 let tutorialText = document.querySelector('#tutorialDisplay p');

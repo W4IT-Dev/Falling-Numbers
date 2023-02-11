@@ -1,4 +1,19 @@
 function appStart() {
+    getKaiAd({
+        publisher: ' fe2d9134-74be-48d8-83b9-96f6d803efef',
+        app: 'Rubik\'s Cube Timer',
+        slot: 'yourSlotName',
+        test: 1,
+        onerror: err => console.error('Error:', err),
+        onready: ad => {
+            ad.call('display')
+
+            ad.on('display', () => {
+                if (ingame) pause();
+            })
+        }
+    })
+
     canvas = document.querySelector('canvas');
     ctx = canvas.getContext('2d');
     loadImages();
@@ -30,7 +45,7 @@ function draw() {
 
 function startGame() {
     footer.innerHTML = '<div id="softleft">Pause</div>';
-    startScreen.style.display = gameOverScreen.style.display = 'none';
+    startScreen.style.display = gameOverScreen[0].style.display = 'none';
     scoreDisplay.innerText = 'Score: 0';
     scoreDisplay.style.display = 'block';
     ingame = true;
@@ -40,18 +55,37 @@ function startGame() {
 }
 
 function gameOver() {
-    footer.innerHTML = `
-        <div id="softleft">Tutorial</div>
-        <div id="softright">Home</div>
-    `
-    spawnIntervalTime = 1800;
     left = right = ingame = false;
     clearInterval(newNumbers);
     clearInterval(updateInterval);
-    gameOverScreen.style.display = 'block';
+    gameOverScreen[0].style.display = 'block';
     scoreDisplay.style.display = 'none';
-    timeGone = score = 0;
-    if (score > highscore) return newHighScore();
+    footer.innerHTML = `
+        <div id="softleft">Tutorial</div>
+        <div id="softright">Home</div>
+        `
+    if (!alreadyRespawned) {
+        haveRespwanPossibility = true;
+        gameOverScreen[1].style.display = 'block';
+        
+        setTimeout(() => {
+            if (gameOverScreen[0].style.display = 'block') {
+                haveRespwanPossibility = false;
+                spawnIntervalTime = 1800;
+                gameOverScreen[1].style.display = 'none';
+                gameOverScreen[2].style.display = 'block';
+                timeGone = 0;
+                if (score > highscore) return isNewHighScore();
+                scoreDisplay2.innerHTML = `Score:${score}`;
+            }
+        }, 4000)
+        return
+    }
+    haveRespwanPossibility = false;
+    spawnIntervalTime = 1800;
+    gameOverScreen[2].style.display = 'block';
+    timeGone = 0;
+    if (score > highscore) return isNewHighScore();
     scoreDisplay2.innerHTML = `Score:${score}`;
 }
 
@@ -81,7 +115,7 @@ function pause() {
 }
 
 function tutorial() {
-    startScreen.style.display = gameOverScreen.style.display = scoreDisplay.style.display = 'none'
+    startScreen.style.display = gameOverScreen[0].style.display = scoreDisplay.style.display = 'none'
     tutorialScreen.style.display = 'block'
     footer.innerHTML = `
         <div id="softleft" style="color: #444">Last</div>
@@ -95,7 +129,7 @@ function handleTutorialText(move) {
         if (tutorialText.innerText.includes('5')) return
         if (tutorialText.innerText.includes('4')) return footer.children[0].style.color = '#444', tutorialText.innerText = "Press Enter/5 to increase the player's number.";
         if (tutorialText.innerText.includes('6')) return tutorialText.innerText = "Press Left/4 to move to the left.";
-        if (tutorialText.innerText.includes('Match')) return footer.children[2].innerText = 'Next', footer.children[2].innerText = 'Finsih', tutorialText.innerText = "Press Right/6 to move to the right.";
+        if (tutorialText.innerText.includes('Match')) return footer.children[2].innerText = 'Next', tutorialText.innerText = "Press Right/6 to move to the right.";
         return
     }
     if (tutorialText.innerText.includes('5')) return footer.children[0].style.color = '#000', tutorialText.innerHTML = "Press Left/4 to move to the left.";
@@ -106,11 +140,21 @@ function handleTutorialText(move) {
 
 function endTutorial() {
     tutorialText.innerText = "Press Enter/5 to increase the player's number.";
+    if (onGameOverScreen) {
+        tutorialScreen.style.display = 'none';
+        gameOverScreen[0].style.display = 'block';
+        footer.innerHTML = `
+            <div id="softleft">Tutorial</div>
+            <div id="softright">Home</div>
+        `
+        onGameOverScreen = false;
+        return
+    }
     home();
 }
 
 function home() {
-    gameOverScreen.style.display = pauseScreen.style.display = tutorialScreen.style.display = 'none';
+    gameOverScreen[0].style.display = pauseScreen.style.display = tutorialScreen.style.display = 'none';
     scoreDisplay.style.display = startScreen.style.display = 'block'
     scoreDisplay.innerText = `High Score: ${highscore}`
     fallingNumbers = [];
@@ -124,13 +168,17 @@ function home() {
     paused = ingame = false;
 }
 
-function newHighScore() {
+function isNewHighScore() {
     localStorage.highscore = highscore = score;
     scoreDisplay2.innerHTML = `New High Score!<br>Score:${score}`;
+    score = 0;
 }
 
 function update() {
+    // console.log('update')
     if (paused) return
+    // console.log('update afet paused return')
+
     let speed;
     if (score / 600 > 0.9) {
         speed = 0.9
@@ -151,7 +199,7 @@ function update() {
                 }
                 return;
             }
-            return gameOver();
+            return gameOver(), hitNumber = number;
         }
         if (number.y > 130) {
             fallingNumbers = fallingNumbers.filter(i => i != number);
