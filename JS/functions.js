@@ -1,23 +1,26 @@
 function appStart() {
-    getKaiAd({
-        publisher: ' fe2d9134-74be-48d8-83b9-96f6d803efef',
-        app: 'Rubik\'s Cube Timer',
-        slot: 'yourSlotName',
-        test: 1,
-        onerror: err => console.error('Error:', err),
-        onready: ad => {
-            ad.call('display')
+    if (!window.navigator.onLine) console.log('User is offline');
+    else {
+        getKaiAd({
+            publisher: ' fe2d9134-74be-48d8-83b9-96f6d803efef',
+            app: 'Rubik\'s Cube Timer',
+            slot: 'yourSlotName',
+            test: 1,
+            onerror: err => console.error('Error:', err),
+            onready: ad => {
+                ad.call('display')
 
-            ad.on('display', () => {
-                if (ingame) pause();
-            })
-        }
-    })
+                ad.on('display', () => {
+                    if (ingame) pause();
+                })
+            }
+        })
+    }
 
     canvas = document.querySelector('canvas');
     ctx = canvas.getContext('2d');
     loadImages();
-    if (localStorage.highscore) highscore = localStorage.highscore, scoreDisplay.innerText = `High Score: ${highscore}`;
+    if (localStorage.highscore) highscore = localStorage.highscore, scoreDisplay[0].innerText = `High Score: ${highscore}`;
     if (localStorage.mute) {
         mute = localStorage.mute;
         if (mute === "Mute") return gamemusic.play();
@@ -44,10 +47,16 @@ function draw() {
 }
 
 function startGame() {
+    document.querySelector('#credits').style.display = 'none'
+    fallingNumbers = [];
+    player.x = 145;
+    player.num = 0;
+    player.src = "img/0.png";
+    player.img.src = player.src;
     footer.innerHTML = '<div id="softleft">Pause</div>';
     startScreen.style.display = gameOverScreen[0].style.display = 'none';
-    scoreDisplay.innerText = 'Score: 0';
-    scoreDisplay.style.display = 'block';
+    scoreDisplay[0].innerText = 'Score: 0';
+    scoreDisplay[0].style.display = 'block';
     ingame = true;
     draw();
     newNumbers = setInterval(addNewNumbers, 100);
@@ -59,25 +68,31 @@ function gameOver() {
     clearInterval(newNumbers);
     clearInterval(updateInterval);
     gameOverScreen[0].style.display = 'block';
-    scoreDisplay.style.display = 'none';
+    scoreDisplay[0].style.display = 'none';
     footer.innerHTML = `
         <div id="softleft">Tutorial</div>
         <div id="softright">Home</div>
         `
-    if (!alreadyRespawned) {
+    if (!alreadyRespawned && window.navigator.onLine) {
+
+        document.querySelector('#progressbar').classList.add('animate');
         haveRespwanPossibility = true;
+        scoreDisplay[1].innerText = `Score: ${score}`;
+        gameOverScreen[2].style.display = 'none'
         gameOverScreen[1].style.display = 'block';
-        
+
         setTimeout(() => {
-            if (gameOverScreen[0].style.display = 'block') {
+            if (gameOverScreen[0].style.display == 'block') {
                 haveRespwanPossibility = false;
                 spawnIntervalTime = 1800;
                 gameOverScreen[1].style.display = 'none';
                 gameOverScreen[2].style.display = 'block';
                 timeGone = 0;
                 if (score > highscore) return isNewHighScore();
-                scoreDisplay2.innerHTML = `Score:${score}`;
+                scoreDisplay[2].innerText = `Score:${score}`;
             }
+            document.querySelector('#progressbar').classList.remove('animate');
+
         }, 4000)
         return
     }
@@ -86,7 +101,7 @@ function gameOver() {
     gameOverScreen[2].style.display = 'block';
     timeGone = 0;
     if (score > highscore) return isNewHighScore();
-    scoreDisplay2.innerHTML = `Score:${score}`;
+    scoreDisplay[2].innerText = `Score:${score}`;
 }
 
 function restart() {
@@ -102,7 +117,7 @@ function restart() {
     player.num = 0;
     player.src = "img/0.png";
     player.img.src = player.src;
-    scoreDisplay.innerText = `Score: ${score}`;
+    scoreDisplay[0].innerText = `Score: ${score}`;
 }
 
 function pause() {
@@ -115,7 +130,7 @@ function pause() {
 }
 
 function tutorial() {
-    startScreen.style.display = gameOverScreen[0].style.display = scoreDisplay.style.display = 'none'
+    startScreen.style.display = gameOverScreen[0].style.display = scoreDisplay[0].style.display = 'none'
     tutorialScreen.style.display = 'block'
     footer.innerHTML = `
         <div id="softleft" style="color: #444">Last</div>
@@ -155,8 +170,8 @@ function endTutorial() {
 
 function home() {
     gameOverScreen[0].style.display = pauseScreen.style.display = tutorialScreen.style.display = 'none';
-    scoreDisplay.style.display = startScreen.style.display = 'block'
-    scoreDisplay.innerText = `High Score: ${highscore}`
+    scoreDisplay[0].style.display = startScreen.style.display = 'block'
+    scoreDisplay[0].innerText = `High Score: ${highscore}`
     fallingNumbers = [];
     player.x = 3000;
     clearInterval(newNumbers);
@@ -170,20 +185,18 @@ function home() {
 
 function isNewHighScore() {
     localStorage.highscore = highscore = score;
-    scoreDisplay2.innerHTML = `New High Score!<br>Score:${score}`;
+    scoreDisplay[2].innerText = `New High Score!<br>Score:${score}`;
     score = 0;
 }
 
 function update() {
-    // console.log('update')
     if (paused) return
-    // console.log('update afet paused return')
 
-    let speed;
-    if (score / 600 > 0.9) {
-        speed = 0.9
+    let speed = 0;
+    if (score / 600 > 0.96) {
+        speed = 0.96
     } else {
-        speed = score / 600;
+        speed = score / 550;
     };
     if (left && player.x > 3) player.x -= (2.9 + speed);
     if (right && player.x + player.width <= 297) player.x += (2.9 + speed);
@@ -193,9 +206,9 @@ function update() {
             if (player.num === number.num) {
                 fallingNumbers = fallingNumbers.filter(i => i != number);
                 score += number.num + 1;
-                scoreDisplay.innerText = `Score: ${score}`;
-                if (spawnIntervalTime > 550) {
-                    spawnIntervalTime = 1800 - score / 1.55;
+                scoreDisplay[0].innerText = `Score: ${score}`;
+                if (spawnIntervalTime >= 850) {
+                    spawnIntervalTime = 1800 - (score / .2);
                 }
                 return;
             }
@@ -231,7 +244,7 @@ function addNewNumbers() {
     let newNumber = {
         num: number,
         x: Math.random() * 260,
-        y: Math.random() * -50,
+        y: Math.random() * -30,
         height: 17,
         width: 33,
         src: "img/" + number + ".png",

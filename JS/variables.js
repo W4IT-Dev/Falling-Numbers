@@ -24,8 +24,12 @@ let fallingNumbers = [];
 let gamemusic = new Audio("sound/Komiku-Bicycle.mp3");
 
 // === DOM Stuff ===
-let scoreDisplay = document.querySelector('#scoreDisplay');
-let scoreDisplay2 = document.querySelector('#score');
+let scoreDisplay = [
+    document.querySelector('#scoreDisplay'),
+    document.querySelector('#gameOverDisplay #respawnPossibilityScreen p'),
+    document.querySelector('#gameOverDisplay #gameOver p'),
+];
+
 let startScreen = document.querySelector('#startScreen');
 let gameOverScreen = [
     document.querySelector('#gameOverDisplay'),

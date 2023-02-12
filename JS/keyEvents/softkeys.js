@@ -17,4 +17,6 @@ document.addEventListener('keydown', e => {
     if (e.key == 'Enter') {
         if (tutorialScreen.style.display == 'block') return endTutorial();
     }
+
+    if (e.key == '*' && startScreen.style.display == 'block') window.open('https://www.chosic.com/free-music/all/', '_blank');
 });

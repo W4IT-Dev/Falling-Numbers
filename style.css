@@ -66,6 +66,71 @@ canvas {
     line-height: 22px;
 }
 
+#progress-wraper {
+    margin: -10px 0 -7px 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110px;
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 1px
+}
+
+#progressbar {
+    height: 15px;
+    /* width: 20%; */
+    background-color: black;
+    border-radius: 2px;
+}
+
+.animate {
+    animation-name: expire;
+    animation-delay: .3s;
+    animation-duration: 4s;
+}
+
+.credits {
+    z-index: 100;
+    position: absolute;
+    font-size: 12px;
+    bottom: 15px;
+    white-space: nowrap;
+    animation-name: loop;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.credits.link {
+    font-size: 15px;
+    bottom: 20px;
+}
+
+.credits.info {
+    transform: translateX(140%);
+}
+
+@keyframes expire {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0%;
+    }
+}
+
+@keyframes loop {
+    from {
+        left: 100%;
+    }
+
+    to {
+        left: -100%;
+    }
+}
+
 footer {
     display: flex;
     justify-content: space-between;

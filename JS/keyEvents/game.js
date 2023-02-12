@@ -12,7 +12,7 @@ document.addEventListener('keydown', e => {
                 app: 'Rubik\'s Cube Timer',
                 slot: 'yourSlotName',
                 test: 1,
-                onerror: err => alert('Error displaying the ad ' + err + '\nTry again.'),
+                onerror: err => alert('Error displaying the ad.\nTry again.'),
                 onready: ad => {
                     alreadyRespawned = true;
                     fallingNumbers.forEach(number => {
@@ -27,15 +27,15 @@ document.addEventListener('keydown', e => {
 
                     })
                     ad.on('close', () => {
-                        haveRespwanPossibility = false;
-                        alreadyRespawned = ingame = true;
+                        haveRespwanPossibility = alreadyRespawned = false;
+                        ingame = true;
                         newNumbers = setInterval(addNewNumbers, 100);
                         updateInterval = setInterval(update, 25);
                         gameOverScreen[0].style.display = 'none'
                     })
                     ad.on('open', () => {
-                        haveRespwanPossibility = false;
-                        alreadyRespawned = ingame = true;
+                        haveRespwanPossibility = alreadyRespawned = false;
+                        ingame = true;
                         newNumbers = setInterval(addNewNumbers, 100);
                         updateInterval = setInterval(update, 25);
                         gameOverScreen[0].style.display = 'none'
@@ -58,14 +58,7 @@ document.addEventListener('keydown', e => {
         // === Increase player's number === 
         if (ingame) return changePlayerNumber();
 
-        if (gameOverScreen[0].style.display == 'block') return
-
         // === Start game ===
-        fallingNumbers = [];
-        player.x = 145;
-        player.num = 0;
-        player.src = "img/0.png";
-        player.img.src = player.src;
         startGame();
     }
 
