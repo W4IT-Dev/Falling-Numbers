@@ -6,7 +6,6 @@ document.addEventListener('keydown', e => {
     if (e.key === "Enter" || e.key === "5") {
         // === Watch ad to respawn ===
         if (haveRespwanPossibility) {
-
             getKaiAd({
                 publisher: ' fe2d9134-74be-48d8-83b9-96f6d803efef',
                 app: 'Falling Numbers',
@@ -57,7 +56,8 @@ document.addEventListener('keydown', e => {
 
         // === Increase player's number === 
         if (ingame) return changePlayerNumber();
-
+        
+        if(creditsScreen.style.display == 'block') return
         // === Start game ===
         startGame();
     }
