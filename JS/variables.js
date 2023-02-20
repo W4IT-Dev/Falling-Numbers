@@ -15,13 +15,12 @@ let score = highscore = timeGone = 0;
 let left = right = ingame = paused = alreadyRespawned = haveRespwanPossibility = onGameOverScreen = false;
 
 let spawnIntervalTime = 1800;
-
 let mute = 'Mute';
 
 let fallingNumbers = [];
 
 // === Audio === 
-let gamemusic = new Audio("sound/Komiku-Bicycle.mp3");
+let gamemusic = new Audio("sounds/Komiku-Bicycle.mp3");
 
 // === DOM Stuff ===
 let scoreDisplay = [
@@ -37,8 +36,10 @@ let gameOverScreen = [
     document.querySelector('#gameOverDisplay #gameOver')
 ]
 let pauseScreen = document.querySelector('#pauseDisplay');
+let creditsScreen = document.querySelector('#creditsDisplay');
 let tutorialScreen = document.querySelector('#tutorialDisplay');
 let tutorialText = document.querySelector('#tutorialDisplay p');
+let credits = document.querySelector('#credits');
 let footer = document.querySelector('footer');
 
 window.addEventListener('error', e => {

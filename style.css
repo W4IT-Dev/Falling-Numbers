@@ -20,7 +20,8 @@ canvas {
 #scoreDisplay,
 #gameOverDisplay,
 #pauseDisplay,
-#tutorialDisplay {
+#tutorialDisplay,
+#creditsDisplay {
     position: absolute;
     left: 50%;
 }
@@ -35,7 +36,8 @@ canvas {
 #startScreen,
 #gameOverDisplay,
 #pauseDisplay,
-#tutorialDisplay {
+#tutorialDisplay,
+#creditsDisplay {
     line-height: 18px;
     text-align: center;
     width: 100%;
@@ -52,9 +54,10 @@ canvas {
 #pauseDisplay,
 #tutorialDisplay,
 #gameOver,
-#respawnPossibilityScreen {
+#respawnPossibilityScreen,
+#creditsDisplay {
     display: none;
-    background-color: rgba(255, 255, 255, .4);
+    background-color: rgba(255, 255, 255, .45);
 }
 
 #gameOverDisplay p {
@@ -90,25 +93,34 @@ canvas {
     animation-duration: 4s;
 }
 
-.credits {
+#credits {
     z-index: 100;
     position: absolute;
-    font-size: 12px;
-    bottom: 15px;
+    font-size: 17px;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
     white-space: nowrap;
-    animation-name: loop;
-    animation-duration: 7s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
 }
 
-.credits.link {
-    font-size: 15px;
-    bottom: 20px;
+#creditsDisplay {
+    background-color: rgba(255, 255, 255, .7);
+    font-size: 17px;
+    padding: -5px;
 }
 
-.credits.info {
-    transform: translateX(140%);
+#creditsDisplay ul {
+    text-align: left;
+}
+
+a {
+    color: #1515df;
+    text-decoration: none;
+}
+
+a:focus {
+    color: #00e;
+    text-decoration: underline;
 }
 
 @keyframes expire {
@@ -121,15 +133,6 @@ canvas {
     }
 }
 
-@keyframes loop {
-    from {
-        left: 100%;
-    }
-
-    to {
-        left: -100%;
-    }
-}
 
 footer {
     display: flex;

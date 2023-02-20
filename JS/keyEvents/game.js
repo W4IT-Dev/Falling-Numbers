@@ -9,16 +9,16 @@ document.addEventListener('keydown', e => {
 
             getKaiAd({
                 publisher: ' fe2d9134-74be-48d8-83b9-96f6d803efef',
-                app: 'Rubik\'s Cube Timer',
-                slot: 'yourSlotName',
+                app: 'Falling Numbers',
+                slot: 'RespawnAd',
                 test: 1,
-                onerror: err => alert('Error displaying the ad.\nTry again.'),
+                onerror: () => alert('Error displaying the ad.\nTry again.'),
                 onready: ad => {
+                    if (gameOverScreen[0].style.display == 'block') return
                     alreadyRespawned = true;
                     fallingNumbers.forEach(number => {
                         number.y -= 50;
                     })
-                    // fallingNumbers = [];
                     footer.innerHTML = '<div id="softleft">Pause</div>'
                     ad.call('display')
 

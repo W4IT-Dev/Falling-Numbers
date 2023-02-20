@@ -47,7 +47,7 @@ function draw() {
 }
 
 function startGame() {
-    document.querySelector('#credits').style.display = 'none'
+    credits.style.display = 'none';
     fallingNumbers = [];
     player.x = 145;
     player.num = 0;
@@ -130,8 +130,9 @@ function pause() {
 }
 
 function tutorial() {
-    startScreen.style.display = gameOverScreen[0].style.display = scoreDisplay[0].style.display = 'none'
+    startScreen.style.display = gameOverScreen[0].style.display = scoreDisplay[0].style.display = credits.style.display = 'none'
     tutorialScreen.style.display = 'block'
+
     footer.innerHTML = `
         <div id="softleft" style="color: #444">Last</div>
         <div style="font-size: 25px;font-weight: 700; position: absolute; left: 50%; transform: translate(-50%, -50%)">SKIP</div>
@@ -169,8 +170,8 @@ function endTutorial() {
 }
 
 function home() {
-    gameOverScreen[0].style.display = pauseScreen.style.display = tutorialScreen.style.display = 'none';
-    scoreDisplay[0].style.display = startScreen.style.display = 'block'
+    gameOverScreen[0].style.display = pauseScreen.style.display = tutorialScreen.style.display = creditsScreen.style.display ='none';
+    scoreDisplay[0].style.display = startScreen.style.display = credits.style.display =  'block'
     scoreDisplay[0].innerText = `High Score: ${highscore}`
     fallingNumbers = [];
     player.x = 3000;
@@ -181,6 +182,7 @@ function home() {
         <div id="softright">Tutorial</div>
     `
     paused = ingame = false;
+
 }
 
 function isNewHighScore() {
@@ -257,6 +259,8 @@ function addNewNumbers() {
 
 function un$mute() {
     if (gamemusic.paused) {
+        paused = false;
+
         gamemusic.play();
         mute = 'Mute';
         footer.innerHTML = `
@@ -266,6 +270,7 @@ function un$mute() {
         localStorage.mute = mute;
         return;
     }
+    paused = true;
     gamemusic.pause();
     localStorage.mute = mute = 'Unmute';
     footer.innerHTML = `
