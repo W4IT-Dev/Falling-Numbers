@@ -56,7 +56,7 @@ document.addEventListener('keydown', e => {
 
         // === Increase player's number === 
         if (ingame) return changePlayerNumber();
-        
+
         if(creditsScreen.style.display == 'block') return
         // === Start game ===
         startGame();
@@ -70,7 +70,6 @@ document.addEventListener('keydown', e => {
 });
 
 document.addEventListener('keyup', e => {
-
     if (!ingame) return
 
     if (e.key == 'ArrowLeft' || e.key == '4') left = false;
