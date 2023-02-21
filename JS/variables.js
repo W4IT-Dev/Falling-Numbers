@@ -7,7 +7,7 @@ let player = {
     y: 127,
     height: 17,
     width: 33,
-    src: "/img/0.png",
+    src: "/img/game/0.png",
     img: new Image()
 };
 

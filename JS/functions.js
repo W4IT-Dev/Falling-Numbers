@@ -33,7 +33,7 @@ function appStart() {
 }
 
 function loadImages() {
-    background.src = "img/background.png";
+    background.src = "img/game/background.png";
     player.img.src = player.src;
 }
 
@@ -47,14 +47,13 @@ function draw() {
 }
 
 function startGame() {
-    credits.style.display = 'none';
     fallingNumbers = [];
     player.x = 145;
     player.num = 0;
-    player.src = "img/0.png";
+    player.src = "img/game/0.png";
     player.img.src = player.src;
     footer.innerHTML = '<div id="softleft">Pause</div>';
-    startScreen.style.display = gameOverScreen[0].style.display = 'none';
+    startScreen.style.display = gameOverScreen[0].style.display = credits.startGame.display = 'none';
     scoreDisplay[0].innerText = 'Score: 0';
     scoreDisplay[0].style.display = 'block';
     ingame = true;
@@ -115,7 +114,7 @@ function restart() {
     `
     player.x = 145;
     player.num = 0;
-    player.src = "img/0.png";
+    player.src = "img/game/0.png";
     player.img.src = player.src;
     scoreDisplay[0].innerText = `Score: ${score}`;
 }
@@ -170,8 +169,8 @@ function endTutorial() {
 }
 
 function home() {
-    gameOverScreen[0].style.display = pauseScreen.style.display = tutorialScreen.style.display = creditsScreen.style.display ='none';
-    scoreDisplay[0].style.display = startScreen.style.display = credits.style.display =  'block'
+    gameOverScreen[0].style.display = pauseScreen.style.display = tutorialScreen.style.display = creditsScreen.style.display = 'none';
+    scoreDisplay[0].style.display = startScreen.style.display = credits.style.display = 'block'
     scoreDisplay[0].innerText = `High Score: ${highscore}`
     fallingNumbers = [];
     player.x = 3000;
@@ -230,7 +229,7 @@ function changePlayerNumber() {
     } else {
         player.num = 0;
     }
-    player.img.src = "img/" + player.num + ".png";
+    player.img.src = "img/game/" + player.num + ".png";
 }
 
 function addNewNumbers() {
@@ -249,7 +248,7 @@ function addNewNumbers() {
         y: Math.random() * -30,
         height: 17,
         width: 33,
-        src: "img/" + number + ".png",
+        src: "img/game/" + number + ".png",
         img: new Image(),
         speed: 0.9 + speed
     }

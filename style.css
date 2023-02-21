@@ -13,7 +13,7 @@ body {
 canvas {
     height: 320px;
     width: 240px;
-    background-image: url('/img/background.png')
+    background-image: url('/img/game/background.png')
 }
 
 #startScreen,
