@@ -53,7 +53,7 @@ function startGame() {
     player.src = "img/game/0.png";
     player.img.src = player.src;
     footer.innerHTML = '<div id="softleft">Pause</div>';
-    startScreen.style.display = gameOverScreen[0].style.display = credits.startGame.display = 'none';
+    startScreen.style.display = gameOverScreen[0].style.display = credits.style.display = 'none';
     scoreDisplay[0].innerText = 'Score: 0';
     scoreDisplay[0].style.display = 'block';
     ingame = true;
