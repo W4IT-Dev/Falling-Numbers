@@ -1,4 +1,4 @@
-let canvas, ctx, newNumbers, updateInterval, hitNumber;
+let canvas, ctx, newNumbers, updateInterval, hitNumber, adCapCounter, gameOverScreenTimeout; 
 let background = new Image();
 
 let player = {
@@ -11,37 +11,32 @@ let player = {
     img: new Image()
 };
 
-let score = highscore = timeGone = 0;
-let left = right = ingame = paused = alreadyRespawned = haveRespwanPossibility = onGameOverScreen = false;
+let score = highscore = timeGone = deathCount = 0;
+let left = right = ingame = paused = alreadyRespawned = onGameOverScreen = alreadyRespawned = clickedOnAd = false;
+let ableToShowAD = true;
 
 let spawnIntervalTime = 1800;
 let mute = 'Mute';
 
 let fallingNumbers = [];
 
-// === Audio === 
 let gamemusic = new Audio("sounds/Komiku-Bicycle.mp3");
 
-// === DOM Stuff ===
 let scoreDisplay = [
     document.querySelector('#scoreDisplay'),
-    document.querySelector('#gameOverDisplay #respawnPossibilityScreen p'),
-    document.querySelector('#gameOverDisplay #gameOver p'),
+    document.querySelector('#gameOverDisplay #respawnScreen p'),
+    document.querySelector('#gameOverDisplay #gameOver p')
 ];
 
 let startScreen = document.querySelector('#startScreen');
-let gameOverScreen = [
-    document.querySelector('#gameOverDisplay'),
-    document.querySelector('#gameOverDisplay #respawnPossibilityScreen'),
-    document.querySelector('#gameOverDisplay #gameOver')
-]
+let gameOverScreen = document.querySelector('#gameOverDisplay');
+let respawnScreen = document.querySelector('#respawnScreen');
+let gameScreen = document.querySelector('#gameOver');
 let pauseScreen = document.querySelector('#pauseDisplay');
-let creditsScreen = document.querySelector('#creditsDisplay');
+let creditsScreen = document.querySelector('#informationDisplay');
 let tutorialScreen = document.querySelector('#tutorialDisplay');
 let tutorialText = document.querySelector('#tutorialDisplay p');
+let progressbar = document.querySelector('#progressbar');
+let loadingAd = document.querySelector('#loadingAd');
 let credits = document.querySelector('#credits');
 let footer = document.querySelector('footer');
-
-window.addEventListener('error', e => {
-    console.error(e);
-})

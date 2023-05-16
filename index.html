@@ -6,12 +6,12 @@
     <script src="/JS/variables.js" defer></script>
     <script src="/JS/functions.js" defer></script>
     <script src="/JS/script.js" defer></script>
-    <script src="/JS/keyEvents/game.js"></script>
-    <script src="/JS/keyEvents/softkeys.js"></script>
-    <script src="/JS/kaiads.v5.min.js"></script>
+    <script src="/JS/keyEvents/game.js" defer></script>
+    <script src="/JS/keyEvents/softkeys.js" defer></script>
+    <script src="/JS/kaiads.v5.min.js" defer></script>
 </head>
 
-<body onload="appStart()">
+<body onload="appStart();">
     <p id="scoreDisplay">High Score: 0</p>
     <div id="startScreen" style="display: block;">
         <h1>Falling Numbers</h1>
@@ -22,13 +22,13 @@
         <p>Press Enter/5 to continue the game</p>
     </div>
     <div id="gameOverDisplay">
-        <div id="respawnPossibilityScreen">
+        <div id="respawnScreen">
             <h1>Get another life?</h1>
             <p id="score" style="font-size: 25px;">Score: 0</p>
             <div id="progress-wraper">
                 <div id="progressbar"></div>
             </div>
-            <p>Press Enter/5 to watch an advertisement and get another life.</p>
+            <p>Press Enter/5 to watch an advertisement and open it to get another life.</p>
         </div>
         <div id="gameOver">
             <h1>Game Over!</h1>
@@ -37,17 +37,24 @@
         </div>
     </div>
     <div id="tutorialDisplay">
-        <!-- <img src="/img/tutorial/1.png"> -->
         <p>Press Enter/5 to increase the player's number.</p>
     </div>
-    <p id="credits">Press * to view credits.</p>
-    <div id="creditsDisplay" class="hidden">
+    <p id="credits">Press * to view informations.</p>
+    <div id="informationDisplay">
         <h1>Credits</h1>
-        <p style="font-size: 22px; font-weight: 600;">Special thanks to:</p>
+        <p style="font-size: 19px; font-weight: 600;">Special thanks to:</p>
         <ul>
             <li>chosic.com for the Background Music: <a href="https://www.chosic.com/free-music/all/"
                     target="_blank">https://www.chosic.com/free-music/all/</a></li>
         </ul>
+        <h1>Contact</h1>
+        <p>If you found any bugs, you can contact me per <a
+                href="mailto:w4it.dev.business@gmail.com?Subject=Falling%20Numbers%20Bug%20Report"
+                target="_blank">E-Mail</a></p>
+    </div>
+    <div id="loadingAd">
+        <div class="load"></div>
+        <p style="font-size: 25px; font-weight: 700;">Loading Ad...</p>
     </div>
     <canvas></canvas>
     <footer>

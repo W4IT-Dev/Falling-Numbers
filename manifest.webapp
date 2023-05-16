@@ -1,12 +1,12 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "Falling Numbers",
-  "description": "A fun game where you have to match the numbers!",
+  "description": "A fun and addictive game.",
   "type": "web",
   "launch_path": "/index.html",
   "icons": {
-    "56": "/img/icons/icon_56.png",
-    "128": "/img/icons/icon_112.png"
+    "56": "/img/icons/icon.png",
+    "112": "/img/icons/icon.png"
   },
   "developer": {
     "name": "W4IT Dev",
@@ -15,8 +15,8 @@
   "locales": {
     "en-US": {
       "name": "Falling Numbers",
-      "subtitle": "Be fast and match the number",
-      "description": "A fun game where you have to match the numbers!"
+      "subtitle": "A fun and addictive game.",
+      "description": "Test your reflexes with Falling Numbers, a fast-paced game where you collect falling numbers to increase your score. But be careful! You must match the numbers correctly, or it's game over. With each successful match, the game gets harder, providing an endless challenge for players. Whether you're looking for a quick distraction or a new addiction, Falling Numbers is the perfect choice."
     }
   },
   "default_locale": "en-US",

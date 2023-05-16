@@ -10,6 +10,14 @@ body {
     font-family: 'Patrick Hand';
 }
 
+body div {
+    overflow: hidden;
+}
+
+div {
+    overflow: hidden;
+}
+
 canvas {
     height: 320px;
     width: 240px;
@@ -21,7 +29,8 @@ canvas {
 #gameOverDisplay,
 #pauseDisplay,
 #tutorialDisplay,
-#creditsDisplay {
+#informationDisplay,
+#loadingAd {
     position: absolute;
     left: 50%;
 }
@@ -37,7 +46,9 @@ canvas {
 #gameOverDisplay,
 #pauseDisplay,
 #tutorialDisplay,
-#creditsDisplay {
+#informationDisplay,
+#loadingAd {
+    position: absolute;
     line-height: 18px;
     text-align: center;
     width: 100%;
@@ -55,7 +66,7 @@ canvas {
 #tutorialDisplay,
 #gameOver,
 #respawnPossibilityScreen,
-#creditsDisplay {
+#informationDisplay {
     display: none;
     background-color: rgba(255, 255, 255, .45);
 }
@@ -82,15 +93,13 @@ canvas {
 
 #progressbar {
     height: 15px;
-    /* width: 20%; */
     background-color: black;
     border-radius: 2px;
 }
 
 .animate {
-    animation-name: expire;
-    animation-delay: .3s;
-    animation-duration: 4s;
+    animation: 5s linear .3s expire;
+    width: 0;
 }
 
 #credits {
@@ -103,13 +112,18 @@ canvas {
     white-space: nowrap;
 }
 
-#creditsDisplay {
-    background-color: rgba(255, 255, 255, .7);
-    font-size: 17px;
-    padding: -5px;
+#informationDisplay {
+    background-color: rgba(255, 255, 255, .8);
+    font-size: 16px;
+    padding: 0px;
+    line-height: 15px;
 }
 
-#creditsDisplay ul {
+#informationDisplay h1 {
+    font-size: 31px;
+}
+
+#informationDisplay ul {
     text-align: left;
 }
 
@@ -145,4 +159,38 @@ footer {
     z-index: 10;
     padding: 3.4px;
     font-size: 18.4px;
+    overflow: hidden;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#loadingAd {
+    display: none;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.load {
+    width: 100px;
+    height: 100px;
+    margin: 110px auto 0;
+    border: solid 7px #fff;
+    border-radius: 50%;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    transition: all 0.5s ease-in;
+    animation-name: rotate;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
