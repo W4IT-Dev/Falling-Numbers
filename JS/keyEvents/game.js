@@ -1,4 +1,5 @@
 document.addEventListener('keydown', e => {
+    if(loadingAd.style.display == "block") return
     if (e.key.includes('Arrow')) e.preventDefault();
 
     if(e.key == "0") {

@@ -15,16 +15,15 @@ function appStart() {
 }
 
 function ad(respawnAd) {
-    if (!window.navigator.onLine || !ableToShowAD) return
-    loadingAd.style.display = "block";
+    if (!window.navigator.onLine || !ableToShowAD) return loadingAd.style.display = "block";
     getKaiAd({
         publisher: ' fe2d9134-74be-48d8-83b9-96f6d803efef',
         app: 'Falling Numbers',
         test: 1,
         onerror: err => {
             loadingAd.style.display = "none";
-            alert('Sorry!\nAn error occurred while attempting to serve an ad');
-            console.log('An error with following code occurred while attempting to serve an ad:', err)
+            alert('An error occurred while attempting to serve an ad');
+            console.log('KaiAd Error:', err)
         },
         onready: ad => {
             clearTimeout(adCapCounter);

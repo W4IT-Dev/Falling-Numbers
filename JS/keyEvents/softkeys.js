@@ -1,4 +1,6 @@
 document.addEventListener('keydown', e => {
+    if(loadingAd.style.display == "block") return
+
     if (e.key == 'SoftLeft') {
         if (paused) return restart();
         if (ingame) return pause();

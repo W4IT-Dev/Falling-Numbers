@@ -21,7 +21,8 @@ div {
 canvas {
     height: 320px;
     width: 240px;
-    background-image: url('/img/game/background.png')
+    background-image: url('/img/game/background.png');
+    background-size: cover;
 }
 
 #startScreen,
