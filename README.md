@@ -11,7 +11,7 @@ Whether you're looking for a quick distraction or a new addiction, Falling Numbe
 
 ## Download
 * [KaiStore](https://www.kaiostech.com/store/apps/?bundle_id=com.kaiostech.fallingnumbers)
-* [Latest release in this GitHub repo](insert link here)
+* [Latest release in this GitHub repo](https://github.com/W4IT-Dev/Falling-Numbers/releases/tag/v1.1.0-update-beta-2)
 <br>
 
 ### Screenshot(s):
