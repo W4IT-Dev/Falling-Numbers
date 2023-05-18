@@ -15,7 +15,10 @@ function appStart() {
 }
 
 function ad(respawnAd) {
-    if (!window.navigator.onLine || !ableToShowAD) return loadingAd.style.display = "block";
+    if (!window.navigator.onLine || !ableToShowAD) return
+    loadingAd.style.display = "block";
+    if (ingame) pause();
+
     getKaiAd({
         publisher: ' fe2d9134-74be-48d8-83b9-96f6d803efef',
         app: 'Falling Numbers',
@@ -244,12 +247,10 @@ function isNewHighScore() {
 function update() {
     if (paused) return
 
-    let speed = 0; 
-    if (score / 600 > 0.96) {
-        speed = score / 700
-    } else {
-        speed = score / 550;
-    };
+    let speed = 0;
+    if (score / 600 > 0.96) speed = score / 700
+    else speed = score / 550
+
     if (left && player.x > 3) player.x -= (2.95 + speed);
     if (right && player.x + player.width <= 297) player.x += (2.95 + speed);
     fallingNumbers.forEach(number => {
@@ -273,11 +274,9 @@ function update() {
 }
 
 function increasePlayerNumber() {
-    if (player.num !== 9) {
-        player.num++;
-    } else {
-        player.num = 0;
-    }
+    if (player.num !== 9) player.num++
+    else player.num = 0;
+
     player.img.src = "img/game/" + player.num + ".png";
 }
 
@@ -286,11 +285,9 @@ function addNewNumber() {
     if (!(spawnIntervalTime - timeGone <= 0)) return timeGone += 100;
     timeGone = 0;
     number = parseInt(Math.random() * 10);
-    if (score / 300 > 1.05) {
-        speed = 1.05
-    } else {
-        speed = score / 300
-    }
+    if (score / 300 > 1.05) speed = score / 500
+    else speed = score / 300
+
     let newNumber = {
         num: number,
         x: Math.random() * 260,
