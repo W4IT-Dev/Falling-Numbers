@@ -107,10 +107,9 @@ function dead() {
         scoreDisplay[1].innerText = `Score: ${score}`;
         gameScreen.style.display = 'none'
         respawnScreen.style.display = 'block';
-        setTimeout(gameOver, 5300)
+        gameOverScreenTimeout = setTimeout(gameOver, 5300)
         return
     }
-    gameOver();
 
 }
 
@@ -144,11 +143,8 @@ function gameOver() {
     progressbar.style.animationPlayState = 'running';
     isNewHighScore();
     deathCount++;
-    if (deathCount == 1) return setTimeout(ad, 500), deathCount = 0;
-    if (deathCount == 4) {
-        setTimeout(ad, 500);
-        deathCount = 0;
-    }
+    if (deathCount == 1) return ad(), deathCount = 0;
+    if (deathCount == 4) ad(), deathCount = 0;
 }
 
 function restart() {
@@ -232,7 +228,6 @@ function home() {
 }
 
 function isNewHighScore() {
-
     if (score > highscore) {
         localStorage.highscore = highscore = score;
         scoreDisplay[2].innerHTML = `New High Score!<br>Score: ${score}`;
@@ -299,7 +294,7 @@ function addNewNumber() {
         speed: 0.9 + speed
     }
     chance = Math.random();
-    if (chance >= .6 - (score / 900)) newNumber.speed += Math.random() * 38;
+    if (chance >= .6 - (score / 900)) newNumber.speed += Math.random() * .38;
     newNumber.img.src = newNumber.src;
     fallingNumbers.push(newNumber);
 }
