@@ -1,6 +1,1 @@
-gamemusic.loop = true;
-gamemusic.volume = 0.6;
-
-document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden' && ingame) pause();
-});
+gamemusic.loop=!0,gamemusic.volume=.6,document.addEventListener("visibilitychange",()=>{"hidden"===document.visibilityState&&ingame&&pause()});
