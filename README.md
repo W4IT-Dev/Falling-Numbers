@@ -2,7 +2,7 @@
 An fun and addictive 2D game for [KaiOS](https://www.kaiostech.com).
 <br>
 
-![https://img.shields.io/badge/v1.1.1-Discontinued-red?style=for-the-badge](https://img.shields.io/badge/v1.1.1-Discontinued-red?style=for-the-badge&link=)
+[![https://img.shields.io/badge/v1.1.1-Discontinued-red?style=for-the-badge](https://img.shields.io/badge/v1.1.1-Discontinued-red?style=for-the-badge&link=)](/)
 
 ## Description
 Test your reflexes with Falling Numbers, a fast-paced game where you collect falling numbers to increase your score.
@@ -12,8 +12,8 @@ Whether you're looking for a quick distraction or a new addiction, Falling Numbe
 <br>
 
 ## Download
-![KaiStore](https://img.shields.io/badge/KaiStore-6F02B5?logo=kaios&link=https://www.kaiostech.com/store/apps/?bundle_id=fallingnumbers)
-![ZIP](https://img.shields.io/badge/ZIP-181717?logo=github&link=https://github.com/W4IT-Dev/Falling-Numbers/releases/download/v1.1.1/Falling.Numbers.v1.1.1.zip)
+[![KaiStore](https://img.shields.io/badge/KaiStore-6F02B5?logo=kaios&link=https://www.kaiostech.com/store/apps/?bundle_id=fallingnumbers)](https://www.kaiostech.com/store/apps/?bundle_id=fallingnumbers)
+[![ZIP](https://img.shields.io/badge/ZIP-181717?logo=github&link=https://github.com/W4IT-Dev/Falling-Numbers/releases/download/v1.1.1/Falling.Numbers.v1.1.1.zip)](https://github.com/W4IT-Dev/Falling-Numbers/releases/download/v1.1.1/Falling.Numbers.v1.1.1.zip)
 <br>
 
 ### Screenshot(s):
